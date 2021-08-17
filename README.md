@@ -31,7 +31,7 @@ TODO
 2. [TypeDoc](#typedoc)
 3. [Changelog](#changelog)
 4. [Maintainer](#maintainer)
-5. [Licence](#licence)
+5. [License](#license)
 
 ## Installation
 
