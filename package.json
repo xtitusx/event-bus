@@ -1,7 +1,7 @@
 {
   "name": "@xtitusx/event-bus",
   "version": "1.0.0",
-  "description": "Handles events, based on the pub-sub design pattern",
+  "description": "Handles events, on a pub-sub design pattern basis",
   "keywords": [
     "typescript",
     "event-bus",
