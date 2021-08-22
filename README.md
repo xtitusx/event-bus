@@ -19,7 +19,7 @@
 [![Downloads][downloads-image]][npm-url]
 [![Minified size][min-size-image]][npm-url]
 
-**event-bus** handles events, based on the pub-sub design pattern.
+**event-bus** handles events, on a pub-sub design pattern basis.
 
 :rocket: **Node.js ready for launch.**
 
@@ -41,7 +41,7 @@ npm install @xtitusx/event-bus
 
 ## TypeDoc
 
-[GitHub HTML Preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/type-guard/master/docs/index.html)
+[GitHub HTML Preview](https://htmlpreview.github.io/?https://raw.githubusercontent.com/xtitusx/event-bus/master/docs/index.html)
 
 ## Changelog
 
