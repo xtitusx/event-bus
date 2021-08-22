@@ -1,0 +1,10 @@
+language: node_js
+node_js: 12
+branches:
+  only: master
+before_install:
+  - npm install -g codecov
+  - npm install -g snyk
+script:
+  - npm run build
+  - npm run test:ci
