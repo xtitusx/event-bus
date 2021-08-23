@@ -23,8 +23,6 @@
 
 :rocket: **Node.js ready for launch.**
 
-TODO
-
 # Table of Contents
 
 1. [Installation](#installation)

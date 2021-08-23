@@ -38,6 +38,7 @@
     "url": "git+https://github.com/xtitusx/event-bus.git"
   },
   "dependencies": {
+    "@xtitusx/type-guard": "^4.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
