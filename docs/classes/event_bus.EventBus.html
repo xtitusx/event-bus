@@ -2785,7 +2785,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/8fdcd07/src/event-bus.ts#L11">event-bus.ts:11</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/1662ad1/src/event-bus.ts#L10">event-bus.ts:10</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <a href="event_bus.EventBus.html" class="tsd-signature-type" data-tsd-kind="Class">EventBus</a></h4>
@@ -2801,7 +2801,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">subscribers<wbr>ByEvent<span class="tsd-signature-symbol">:</span> <a href="../interfaces/i_event_bus.ISubscribersByEvent.html" class="tsd-signature-type" data-tsd-kind="Interface">ISubscribersByEvent</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/8fdcd07/src/event-bus.ts#L9">event-bus.ts:9</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/1662ad1/src/event-bus.ts#L8">event-bus.ts:8</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2818,7 +2818,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/8fdcd07/src/event-bus.ts#L86">event-bus.ts:86</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/1662ad1/src/event-bus.ts#L87">event-bus.ts:87</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -2829,14 +2829,14 @@ img {
 				<a name="once" class="tsd-anchor"></a>
 				<h3>once</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">once&lt;T&gt;<span class="tsd-signature-symbol">(</span>subscriber<span class="tsd-signature-symbol">: </span><a href="../interfaces/i_subscriber.ISubscriber.html" class="tsd-signature-type" data-tsd-kind="Interface">ISubscriber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<li class="tsd-signature tsd-kind-icon">once&lt;T&gt;<span class="tsd-signature-symbol">(</span>subscriber<span class="tsd-signature-symbol">: </span><a href="../interfaces/i_subscriber.ISubscriber.html" class="tsd-signature-type" data-tsd-kind="Interface">ISubscriber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="event_bus.EventBus.html" class="tsd-signature-type" data-tsd-kind="Class">EventBus</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/i_event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/i_event_bus.IEventBus.html#once">once</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/8fdcd07/src/event-bus.ts#L48">event-bus.ts:48</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/1662ad1/src/event-bus.ts#L48">event-bus.ts:48</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2846,6 +2846,9 @@ img {
 							<dl class="tsd-comment-tags">
 								<dt>override</dt>
 								<dd></dd>
+								<dt>remarks</dt>
+								<dd><p>Chainable method.</p>
+								</dd>
 							</dl>
 						</div>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -2862,7 +2865,7 @@ img {
 								</div>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="event_bus.EventBus.html" class="tsd-signature-type" data-tsd-kind="Class">EventBus</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -2870,14 +2873,14 @@ img {
 				<a name="publish" class="tsd-anchor"></a>
 				<h3>publish</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
-					<li class="tsd-signature tsd-kind-icon">publish&lt;T&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="event.Event.html" class="tsd-signature-type" data-tsd-kind="Class">Event</a>, arg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<li class="tsd-signature tsd-kind-icon">publish&lt;T&gt;<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><a href="event.Event.html" class="tsd-signature-type" data-tsd-kind="Class">Event</a>, msg<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/i_event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/i_event_bus.IEventBus.html#publish">publish</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/8fdcd07/src/event-bus.ts#L65">event-bus.ts:65</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/1662ad1/src/event-bus.ts#L67">event-bus.ts:67</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2901,7 +2904,7 @@ img {
 								<h5>event: <a href="event.Event.html" class="tsd-signature-type" data-tsd-kind="Class">Event</a></h5>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> arg: <span class="tsd-signature-type">T</span></h5>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> msg: <span class="tsd-signature-type">T</span></h5>
 								<div class="tsd-comment tsd-typography">
 								</div>
 							</li>
@@ -2921,7 +2924,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/i_event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/i_event_bus.IEventBus.html#subscribe">subscribe</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/8fdcd07/src/event-bus.ts#L20">event-bus.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/1662ad1/src/event-bus.ts#L19">event-bus.ts:19</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Tyr } from '@xtitusx/type-guard';
 
 import { Event } from './event';
 import { IEventBus, ISubscription, ISubscribersByEvent } from './i-event-bus';
@@ -33,7 +32,7 @@ export class EventBus implements IEventBus {
             unsubscribe: (): void => {
                 delete this.subscribersByEvent[eventName][id];
 
-                if (Tyr.array().isEmpty().guard(Object.keys(this.subscribersByEvent[eventName])).isSuccess()) {
+                if (Object.keys(this.subscribersByEvent[eventName]).length === 0) {
                     delete this.subscribersByEvent[eventName];
                 }
             },
@@ -43,9 +42,10 @@ export class EventBus implements IEventBus {
     /**
      * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.
      * @override
+     * @remarks Chainable method.
      * @param subscriber
      */
-    public once<T extends Event>(subscriber: ISubscriber<T>): void {
+    public once<T extends Event>(subscriber: ISubscriber<T>): this {
         const eventName = subscriber.event.name;
         const id = this.getNextId();
 
@@ -54,31 +54,32 @@ export class EventBus implements IEventBus {
         }
 
         this.subscribersByEvent[eventName][id] = { callback: subscriber.callback, once: true };
+
+        return this;
     }
 
     /**
      * Executes each of the subscribers for the specified event.
      * @override
      * @param event
-     * @param arg
+     * @param msg
      */
-    public publish<T>(event: Event, arg?: T): void {
+    public publish<T>(event: Event, msg?: T): void {
         const eventSubscribers = this.subscribersByEvent[event.name];
 
-        if (Tyr.nil().isUndefined().guard(eventSubscribers).isSuccess()) {
+        if (eventSubscribers === undefined) {
             return;
         }
 
         for (const id in eventSubscribers) {
             const eventSubscriber = eventSubscribers[id];
-            eventSubscriber.callback(arg);
+            eventSubscriber.callback(msg);
 
             if (eventSubscriber.once === true) {
                 delete eventSubscribers[id];
             }
         }
-
-        if (Tyr.array().isEmpty().guard(Object.keys(this.subscribersByEvent[event.name])).isSuccess()) {
+        if (Object.keys(this.subscribersByEvent[event.name]).length === 0) {
             delete this.subscribersByEvent[event.name];
         }
     }
