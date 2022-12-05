@@ -66,6 +66,14 @@ describe('EventBus', () => {
             assert.equal(Test.MSG, 'Hello World!');
             assert.equal(Test.COUNT, 5);
         });
+
+        it("shoud assign undefined value to 'Test.MSG'", () => {
+            eventBus.subscribe(new HelloWorldEventSubscriber()).unsubscribe();
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+
+            assert.equal(Test.MSG, undefined);
+            assert.equal(Test.COUNT, 5);
+        });
     });
 
     describe('#once()', () => {
