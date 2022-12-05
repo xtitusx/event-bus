@@ -12,7 +12,9 @@ export class EventBus implements IEventBus {
     }
 
     /**
-     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added. Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
+     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
+     *
+     * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
      * @override
      * @param subscriber
      */
