@@ -2,9 +2,9 @@ import { assert } from 'chai';
 
 import { EventBus } from '../src/event-bus';
 
-import { HelloWorldEventSubscriber } from './hello-world-event.subscriber';
-import { HelloWorldEvent } from './hello-world.event';
-import { HelloWorldMessage } from './hello-world.message';
+import { HelloWorldEventSubscriber } from './fake/hello-world-event.subscriber';
+import { HelloWorldEvent } from './fake/hello-world.event';
+import { HelloWorldMessage } from './fake/hello-world.message';
 
 export class Test {
     public static MSG: string;

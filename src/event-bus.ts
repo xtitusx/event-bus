@@ -1,8 +1,27 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { Event } from './event';
-import { IEventBus, ISubscription, ISubscribersByEvent } from './i-event-bus';
-import { ISubscriber } from './i-subscriber';
+import { ISubscriber } from './subscriber';
+
+export interface ISubscription {
+    id: string;
+    eventName: string;
+    unsubscribe: () => void;
+}
+
+interface ICallable {
+    [key: string]: { callback: Function; once: boolean };
+}
+
+interface ISubscribersByEvent {
+    [key: string]: ICallable;
+}
+
+export interface IEventBus {
+    subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription;
+    once<T extends Event>(subscriber: ISubscriber<T>): IEventBus;
+    publish<T>(event: Event, arg?: T): void;
+}
 
 export class EventBus implements IEventBus {
     private subscribersByEvent: ISubscribersByEvent;
@@ -64,9 +83,9 @@ export class EventBus implements IEventBus {
      * Executes each of the subscribers for the specified event.
      * @override
      * @param event
-     * @param msg
+     * @param message
      */
-    public publish<T>(event: Event, msg?: T): void {
+    public publish<T>(event: Event, message?: T): void {
         const eventSubscribers = this.subscribersByEvent[event.name];
 
         if (eventSubscribers === undefined) {
@@ -75,7 +94,7 @@ export class EventBus implements IEventBus {
 
         for (const id in eventSubscribers) {
             const eventSubscriber = eventSubscribers[id];
-            eventSubscriber.callback(msg);
+            eventSubscriber.callback(message);
 
             if (eventSubscriber.once === true) {
                 delete eventSubscribers[id];
