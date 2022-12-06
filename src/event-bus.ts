@@ -21,6 +21,7 @@ export interface IEventBus {
     subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription;
     once<T extends Event>(subscriber: ISubscriber<T>): IEventBus;
     publish<T>(event: Event, arg?: T): void;
+    clear(): void;
 }
 
 export class EventBus implements IEventBus {
@@ -103,6 +104,14 @@ export class EventBus implements IEventBus {
         if (Object.keys(this.subscribersByEvent[event.name]).length === 0) {
             delete this.subscribersByEvent[event.name];
         }
+    }
+
+    /**
+     * Removes all subscribers.
+     * @override
+     */
+    public clear(): void {
+        this.subscribersByEvent = {};
     }
 
     private getNextId(): string {

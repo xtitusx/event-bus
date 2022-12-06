@@ -106,4 +106,15 @@ describe('EventBus', () => {
             assert.equal(Test.COUNT, 8);
         });
     });
+
+    describe('#clear()', () => {
+        it("shoud assign 'Hello World!' value to 'Test.MSG'", () => {
+            eventBus.subscribe(new HelloWorldEventSubscriber());
+            eventBus.clear();
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+
+            assert.equal(Test.MSG, undefined);
+            assert.equal(Test.COUNT, 8);
+        });
+    });
 });
