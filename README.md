@@ -26,15 +26,138 @@
 # Table of Contents
 
 1. [Installation](#installation)
-2. [TypeDoc](#typedoc)
-3. [Changelog](#changelog)
-4. [Maintainer](#maintainer)
-5. [License](#license)
+2. [Basic Usage](#basic-usage)
+3. [EventBus](#eventbus)
+4. [Subscription](#subscription)
+3. [TypeDoc](#typedoc)
+4. [Changelog](#changelog)
+5. [Maintainer](#maintainer)
+6. [License](#license)
 
 ## Installation
 
 ```
 npm install @xtitusx/event-bus
+```
+
+## Basic Usage
+
+- Declare an event:
+
+```
+export class HelloWorldEvent extends Event {}
+```
+
+- Declare a message:
+
+```
+export type HelloWorldMessage = { name?: string };
+```
+
+- Declare a subscriber:
+
+```
+export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
+    constructor() {
+        super(HelloWorldEvent);
+    }
+
+    /**
+     * @override
+     */
+    public implCallback(): Function {
+        return async (msg: HelloWorldMessage): Promise<void> => {
+            console.log(`Hello ${msg?.name ?? 'World'}!`);
+        };
+    }
+}
+```
+
+- Then you can play around with an **EventBus** instance:
+
+```
+eventBus.subscribe(new HelloWorldEventSubscriber());
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+                name: 'Benjamin',
+            });
+
+// => 'Hello Benjamin!'       
+```
+
+```
+const subcription = eventBus.subscribe(new HelloWorldEventSubscriber());
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+// => 'Hello World!' 
+subcription.unsubscribe();
+```
+
+```
+eventBus.once(new HelloWorldEventSubscriber());
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+                name: 'Chorizo',
+            });
+
+// => 'Hello Chorizo!'       
+```
+
+```
+eventBus.subscribe(new HelloWorldEventSubscriber());
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+                name: 'Benjamin',
+            });
+
+// => 'Hello Benjamin!' 
+eventBus.clear();
+```
+
+## EventBus
+
+```
+export interface IEventBus {
+    /**
+     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
+     *
+     * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
+     * @override
+     * @param subscriber
+     */
+    subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription;
+
+    /**
+     * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.
+     * @override
+     * @remarks Chainable method.
+     * @param subscriber
+     */
+    once<T extends Event>(subscriber: ISubscriber<T>): IEventBus;
+
+    /**
+     * Executes each of the subscribers for the specified event.
+     * @override
+     * @param event
+     * @param message
+     */
+    publish<T>(event: Event, message?: T): void;
+
+    /**
+     * Removes all subscribers.
+     * @override
+     */
+    clear(): void;
+}
+```
+
+## Subscription
+
+```
+export interface ISubscription {
+    id: string;
+    eventName: string;
+    /**
+     * Removes the subscriber for the specified event.
+     */
+    unsubscribe: () => void;
+}
 ```
 
 ## TypeDoc

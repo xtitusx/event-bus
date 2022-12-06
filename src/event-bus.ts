@@ -4,6 +4,9 @@ import { ISubscriber } from './subscriber';
 export interface ISubscription {
     id: string;
     eventName: string;
+    /**
+     * Removes the subscriber for the specified event.
+     */
     unsubscribe: () => void;
 }
 
@@ -16,9 +19,35 @@ interface ISubscribersByEvent {
 }
 
 export interface IEventBus {
+    /**
+     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
+     *
+     * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
+     * @override
+     * @param subscriber
+     */
     subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription;
+
+    /**
+     * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.
+     * @override
+     * @remarks Chainable method.
+     * @param subscriber
+     */
     once<T extends Event>(subscriber: ISubscriber<T>): IEventBus;
-    publish<T>(event: Event, arg?: T): void;
+
+    /**
+     * Executes each of the subscribers for the specified event.
+     * @override
+     * @param event
+     * @param message
+     */
+    publish<T>(event: Event, message?: T): void;
+
+    /**
+     * Removes all subscribers.
+     * @override
+     */
     clear(): void;
 }
 
@@ -32,13 +61,6 @@ export class EventBus implements IEventBus {
         this.subscribersByEvent = {};
     }
 
-    /**
-     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
-     *
-     * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
-     * @override
-     * @param subscriber
-     */
     public subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription {
         const eventName = subscriber.event.name;
         const id = this.getNextId();
@@ -62,12 +84,6 @@ export class EventBus implements IEventBus {
         };
     }
 
-    /**
-     * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.
-     * @override
-     * @remarks Chainable method.
-     * @param subscriber
-     */
     public once<T extends Event>(subscriber: ISubscriber<T>): this {
         const eventName = subscriber.event.name;
         const id = this.getNextId();
@@ -81,12 +97,6 @@ export class EventBus implements IEventBus {
         return this;
     }
 
-    /**
-     * Executes each of the subscribers for the specified event.
-     * @override
-     * @param event
-     * @param message
-     */
     public publish<T>(event: Event, message?: T): void {
         const eventSubscribers = this.subscribersByEvent[event.name];
 
@@ -107,10 +117,6 @@ export class EventBus implements IEventBus {
         }
     }
 
-    /**
-     * Removes all subscribers.
-     * @override
-     */
     public clear(): void {
         this.subscribersByEvent = {};
     }
