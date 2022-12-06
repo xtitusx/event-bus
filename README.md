@@ -76,6 +76,7 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
 - Then you can play around with an **EventBus** instance:
 
 ```
+const eventBus = new EventBus();
 eventBus.subscribe(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
                 name: 'Benjamin',
@@ -85,6 +86,7 @@ eventBus.subscribe(new HelloWorldEventSubscriber());
 ```
 
 ```
+const eventBus = new EventBus();
 const subcription = eventBus.subscribe(new HelloWorldEventSubscriber());
 eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 // => 'Hello World!' 
@@ -92,6 +94,7 @@ subcription.unsubscribe();
 ```
 
 ```
+const eventBus = new EventBus();
 eventBus.once(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
                 name: 'Chorizo',
@@ -101,6 +104,7 @@ eventBus.once(new HelloWorldEventSubscriber());
 ```
 
 ```
+const eventBus = new EventBus();
 eventBus.subscribe(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
                 name: 'Benjamin',
