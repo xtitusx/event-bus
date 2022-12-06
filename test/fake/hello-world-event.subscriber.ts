@@ -13,8 +13,8 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
      * @override
      */
     public implCallback(): Function {
-        return async (msg: HelloWorldMessage): Promise<void> => {
-            Test.MESSAGE = `Hello ${msg?.name ?? 'World'}!`;
+        return async (message: HelloWorldMessage): Promise<void> => {
+            Test.MESSAGE = `Hello ${message?.name ?? 'World'}!`;
             Test.COUNT++;
         };
     }

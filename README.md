@@ -66,8 +66,8 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
      * @override
      */
     public implCallback(): Function {
-        return async (msg: HelloWorldMessage): Promise<void> => {
-            console.log(`Hello ${msg?.name ?? 'World'}!`);
+        return async (message: HelloWorldMessage): Promise<void> => {
+            console.log(`Hello ${message?.name ?? 'World'}!`);
         };
     }
 }
