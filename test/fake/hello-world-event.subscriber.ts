@@ -14,7 +14,7 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
      */
     public implCallback(): Function {
         return async (msg: HelloWorldMessage): Promise<void> => {
-            Test.MSG = `Hello ${msg?.name ?? 'World'}!`;
+            Test.MESSAGE = `Hello ${msg?.name ?? 'World'}!`;
             Test.COUNT++;
         };
     }
