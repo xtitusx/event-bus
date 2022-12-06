@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2022-12-06
+
+### Added
+
+-   Add EventBus.clear() method.
+
+### Changed
+
+-   Rewrite Subscriber, add an abstract implCallback() method (BREAKING CHANGE).
+
 ## [1.1.0] - 2021-08-29
 
 ### Changed

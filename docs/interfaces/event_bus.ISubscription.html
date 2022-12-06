@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ICallable | @xtitusx/event-bus</title>
+	<title>ISubscription | @xtitusx/event-bus</title>
 	<meta name="description" content="Documentation for @xtitusx/event-bus">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">:root {
@@ -2704,17 +2704,25 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
+		<li class=" tsd-kind-class tsd-parent-kind-module">
+			<a href="../classes/event_bus.EventBus.html" class="tsd-kind-icon">Event<wbr>Bus</a>
+		</li>
+		<li class=" tsd-kind-interface tsd-parent-kind-module">
+			<a href="event_bus.IEventBus.html" class="tsd-kind-icon">IEvent<wbr>Bus</a>
+		</li>
 		<li class="current tsd-kind-interface tsd-parent-kind-module">
-			<a href="i_event_bus.ICallable.html" class="tsd-kind-icon">ICallable</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-module">
-			<a href="i_event_bus.IEventBus.html" class="tsd-kind-icon">IEvent<wbr>Bus</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-module">
-			<a href="i_event_bus.ISubscribersByEvent.html" class="tsd-kind-icon">ISubscribers<wbr>ByEvent</a>
-		</li>
-		<li class=" tsd-kind-interface tsd-parent-kind-module">
-			<a href="i_event_bus.ISubscription.html" class="tsd-kind-icon">ISubscription</a>
+			<a href="event_bus.ISubscription.html" class="tsd-kind-icon">ISubscription</a>
+			<ul>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="event_bus.ISubscription.html#eventName" class="tsd-kind-icon">event<wbr>Name</a>
+				</li>
+				<li class=" tsd-kind-property tsd-parent-kind-interface">
+					<a href="event_bus.ISubscription.html#id" class="tsd-kind-icon">id</a>
+				</li>
+				<li class=" tsd-kind-method tsd-parent-kind-interface">
+					<a href="event_bus.ISubscription.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a>
+				</li>
+			</ul>
 		</li>
 	</ul>
 </nav>
@@ -2724,21 +2732,77 @@ img {
 			<h3>Hierarchy</h3>
 			<ul class="tsd-hierarchy">
 				<li>
-					<span class="target">ICallable</span>
+					<span class="target">ISubscription</span>
 				</li>
 			</ul>
 		</section>
-		<section class="tsd-panel tsd-kind-interface tsd-parent-kind-module">
-			<h3 class="tsd-before-signature">Indexable</h3>
-			<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-symbol">{ </span>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">; </span>once<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></div>
-			<ul class="tsd-parameters">
-				<li class="tsd-parameter">
-					<h5>callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Function</span></h5>
-				</li>
-				<li class="tsd-parameter">
-					<h5>once<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></h5>
-				</li>
-			</ul>
+		<section class="tsd-panel-group tsd-index-group">
+			<h2>Index</h2>
+			<section class="tsd-panel tsd-index-panel">
+				<div class="tsd-index-content">
+					<section class="tsd-index-section ">
+						<h3>Properties</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event_bus.ISubscription.html#eventName" class="tsd-kind-icon">event<wbr>Name</a></li>
+							<li class="tsd-kind-property tsd-parent-kind-interface"><a href="event_bus.ISubscription.html#id" class="tsd-kind-icon">id</a></li>
+						</ul>
+					</section>
+					<section class="tsd-index-section ">
+						<h3>Methods</h3>
+						<ul class="tsd-index-list">
+							<li class="tsd-kind-method tsd-parent-kind-interface"><a href="event_bus.ISubscription.html#unsubscribe" class="tsd-kind-icon">unsubscribe</a></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Properties</h2>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="eventName" class="tsd-anchor"></a>
+				<h3>event<wbr>Name</h3>
+				<div class="tsd-signature tsd-kind-icon">event<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/3aaa2f6/src/event-bus.ts#L6">event-bus.ts:6</a></li>
+					</ul>
+				</aside>
+			</section>
+			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<a name="id" class="tsd-anchor"></a>
+				<h3>id</h3>
+				<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/3aaa2f6/src/event-bus.ts#L5">event-bus.ts:5</a></li>
+					</ul>
+				</aside>
+			</section>
+		</section>
+		<section class="tsd-panel-group tsd-member-group ">
+			<h2>Methods</h2>
+			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+				<a name="unsubscribe" class="tsd-anchor"></a>
+				<h3>unsubscribe</h3>
+				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+					<li class="tsd-signature tsd-kind-icon">unsubscribe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/3aaa2f6/src/event-bus.ts#L10">event-bus.ts:10</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Removes the subscriber for the specified event.</p>
+							</div>
+						</div>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+					</li>
+				</ul>
+			</section>
 		</section>
 		<footer class="with-border-bottom">
 			<div class="container">
@@ -2747,6 +2811,8 @@ img {
 					<ul class="tsd-legend">
 						<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
 						<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+						<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+						<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 					</ul>
 					<ul class="tsd-legend">
 						<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

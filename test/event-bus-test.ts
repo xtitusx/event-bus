@@ -2,12 +2,12 @@ import { assert } from 'chai';
 
 import { EventBus } from '../src/event-bus';
 
-import { HelloWorldEventSubscriber } from './hello-world-event.subscriber';
-import { HelloWorldEvent } from './hello-world.event';
-import { HelloWorldMessage } from './hello-world.message';
+import { HelloWorldEventSubscriber } from './fake/hello-world-event.subscriber';
+import { HelloWorldEvent } from './fake/hello-world.event';
+import { HelloWorldMessage } from './fake/hello-world.message';
 
 export class Test {
-    public static MSG: string;
+    public static MESSAGE: string;
     public static COUNT = 0;
 }
 
@@ -15,7 +15,7 @@ describe('EventBus', () => {
     let eventBus: EventBus;
 
     beforeEach(() => {
-        Test.MSG = undefined;
+        Test.MESSAGE = undefined;
         eventBus = new EventBus();
     });
 
@@ -24,7 +24,7 @@ describe('EventBus', () => {
             eventBus.subscribe(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 
-            assert.equal(Test.MSG, 'Hello World!');
+            assert.equal(Test.MESSAGE, 'Hello World!');
             assert.equal(Test.COUNT, 1);
         });
 
@@ -34,7 +34,7 @@ describe('EventBus', () => {
                 name: 'Benjamin',
             });
 
-            assert.equal(Test.MSG, 'Hello Benjamin!');
+            assert.equal(Test.MESSAGE, 'Hello Benjamin!');
             assert.equal(Test.COUNT, 2);
         });
 
@@ -45,7 +45,7 @@ describe('EventBus', () => {
                 name: 'Benjamin',
             });
 
-            assert.equal(Test.MSG, 'Hello Benjamin!');
+            assert.equal(Test.MESSAGE, 'Hello Benjamin!');
             assert.equal(Test.COUNT, 4);
         });
     });
@@ -55,7 +55,7 @@ describe('EventBus', () => {
             const subcription = eventBus.subscribe(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 
-            assert.equal(Test.MSG, 'Hello World!');
+            assert.equal(Test.MESSAGE, 'Hello World!');
             assert.equal(Test.COUNT, 5);
 
             subcription.unsubscribe();
@@ -63,7 +63,7 @@ describe('EventBus', () => {
                 name: 'Benjamin',
             });
 
-            assert.equal(Test.MSG, 'Hello World!');
+            assert.equal(Test.MESSAGE, 'Hello World!');
             assert.equal(Test.COUNT, 5);
         });
 
@@ -71,7 +71,7 @@ describe('EventBus', () => {
             eventBus.subscribe(new HelloWorldEventSubscriber()).unsubscribe();
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 
-            assert.equal(Test.MSG, undefined);
+            assert.equal(Test.MESSAGE, undefined);
             assert.equal(Test.COUNT, 5);
         });
     });
@@ -81,7 +81,7 @@ describe('EventBus', () => {
             eventBus.once(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 
-            assert.equal(Test.MSG, 'Hello World!');
+            assert.equal(Test.MESSAGE, 'Hello World!');
             assert.equal(Test.COUNT, 6);
         });
 
@@ -91,7 +91,7 @@ describe('EventBus', () => {
                 name: 'Benjamin',
             });
 
-            assert.equal(Test.MSG, 'Hello Benjamin!');
+            assert.equal(Test.MESSAGE, 'Hello Benjamin!');
             assert.equal(Test.COUNT, 7);
         });
 
@@ -102,7 +102,18 @@ describe('EventBus', () => {
                 name: 'Benjamin',
             });
 
-            assert.equal(Test.MSG, 'Hello World!');
+            assert.equal(Test.MESSAGE, 'Hello World!');
+            assert.equal(Test.COUNT, 8);
+        });
+    });
+
+    describe('#clear()', () => {
+        it("shoud assign 'Hello World!' value to 'Test.MSG'", () => {
+            eventBus.subscribe(new HelloWorldEventSubscriber());
+            eventBus.clear();
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+
+            assert.equal(Test.MESSAGE, undefined);
             assert.equal(Test.COUNT, 8);
         });
     });

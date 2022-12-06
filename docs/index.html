@@ -2726,6 +2726,9 @@ img {
 			</a>
 			<ol>
 				<li><a href="#installation">Installation</a></li>
+				<li><a href="#basic-usage">Basic Usage</a></li>
+				<li><a href="#eventbus">EventBus</a></li>
+				<li><a href="#subscription">Subscription</a></li>
 				<li><a href="#typedoc">TypeDoc</a></li>
 				<li><a href="#changelog">Changelog</a></li>
 				<li><a href="#maintainer">Maintainer</a></li>
@@ -2735,6 +2738,115 @@ img {
 				<h2>Installation</h2>
 			</a>
 			<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">xtitusx</span><span style="color: #000000">/</span><span style="color: #001080">event</span><span style="color: #000000">-</span><span style="color: #001080">bus</span>
+</code></pre>
+			<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
+				<h2>Basic Usage</h2>
+			</a>
+			<ul>
+				<li>Declare an event:</li>
+			</ul>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldEvent</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Event</span><span style="color: #000000"> {}</span>
+</code></pre>
+			<ul>
+				<li>Declare a message:</li>
+			</ul>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000"> = { </span><span style="color: #001080">name</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000"> };</span>
+</code></pre>
+			<ul>
+				<li>Declare a subscriber:</li>
+			</ul>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldEventSubscriber</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Subscriber</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldEvent</span><span style="color: #000000">&gt; {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">constructor</span><span style="color: #000000">() {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">super</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+<span style="color: #000000">    }</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@override</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">public</span><span style="color: #000000"> </span><span style="color: #795E26">implCallback</span><span style="color: #000000">(): </span><span style="color: #267F99">Function</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">msg</span><span style="color: #000000">: </span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">): </span><span style="color: #267F99">Promise</span><span style="color: #000000">&lt;</span><span style="color: #267F99">void</span><span style="color: #000000">&gt; </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">            </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`Hello </span><span style="color: #0000FF">${</span><span style="color: #001080">msg</span><span style="color: #000000FF">?.</span><span style="color: #001080">name</span><span style="color: #000000FF"> </span><span style="color: #000000">??</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;World&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">!`</span><span style="color: #000000">);</span>
+<span style="color: #000000">        };</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			<ul>
+				<li>Then you can play around with an <strong>EventBus</strong> instance:</li>
+			</ul>
+			<pre><code><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #000000">            </span><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, {</span>
+<span style="color: #000000">                </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Benjamin&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            });</span>
+
+<span style="color: #008000">// =&gt; &#039;Hello Benjamin!&#039;       </span>
+</code></pre>
+			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subcription</span><span style="color: #000000"> = </span><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; &#039;Hello World!&#039; </span>
+<span style="color: #001080">subcription</span><span style="color: #000000">.</span><span style="color: #795E26">unsubscribe</span><span style="color: #000000">();</span>
+</code></pre>
+			<pre><code><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #000000">            </span><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, {</span>
+<span style="color: #000000">                </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Chorizo&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            });</span>
+
+<span style="color: #008000">// =&gt; &#039;Hello Chorizo!&#039;       </span>
+</code></pre>
+			<pre><code><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #000000">            </span><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, {</span>
+<span style="color: #000000">                </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Benjamin&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">            });</span>
+
+<span style="color: #008000">// =&gt; &#039;Hello Benjamin!&#039; </span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">clear</span><span style="color: #000000">();</span>
+</code></pre>
+			<a href="#eventbus" id="eventbus" style="color: inherit; text-decoration: none;">
+				<h2>EventBus</h2>
+			</a>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">IEventBus</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.</span>
+<span style="color: #008000">     *</span>
+<span style="color: #008000">     * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@override</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@param</span><span style="color: #008000"> </span><span style="color: #001080">subscriber</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #795E26">subscribe</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Event</span><span style="color: #000000">&gt;(</span><span style="color: #001080">subscriber</span><span style="color: #000000">: </span><span style="color: #267F99">ISubscriber</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;): </span><span style="color: #267F99">ISubscription</span><span style="color: #000000">;</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@override</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@remarks</span><span style="color: #008000"> Chainable method.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@param</span><span style="color: #008000"> </span><span style="color: #001080">subscriber</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #795E26">once</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Event</span><span style="color: #000000">&gt;(</span><span style="color: #001080">subscriber</span><span style="color: #000000">: </span><span style="color: #267F99">ISubscriber</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;): </span><span style="color: #267F99">IEventBus</span><span style="color: #000000">;</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * Executes each of the subscribers for the specified event.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@override</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@param</span><span style="color: #008000"> </span><span style="color: #001080">event</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@param</span><span style="color: #008000"> </span><span style="color: #001080">message</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">T</span><span style="color: #000000">&gt;(</span><span style="color: #001080">event</span><span style="color: #000000">: </span><span style="color: #267F99">Event</span><span style="color: #000000">, </span><span style="color: #001080">message</span><span style="color: #000000">?: </span><span style="color: #267F99">T</span><span style="color: #000000">): </span><span style="color: #267F99">void</span><span style="color: #000000">;</span>
+
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * Removes all subscribers.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@override</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #795E26">clear</span><span style="color: #000000">(): </span><span style="color: #267F99">void</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			<a href="#subscription" id="subscription" style="color: inherit; text-decoration: none;">
+				<h2>Subscription</h2>
+			</a>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">interface</span><span style="color: #000000"> </span><span style="color: #267F99">ISubscription</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">id</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">eventName</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * Removes the subscriber for the specified event.</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #795E26">unsubscribe</span><span style="color: #000000">: () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #267F99">void</span><span style="color: #000000">;</span>
+<span style="color: #000000">}</span>
 </code></pre>
 			<a href="#typedoc" id="typedoc" style="color: inherit; text-decoration: none;">
 				<h2>TypeDoc</h2>
@@ -2786,8 +2898,6 @@ img {
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-module"><a href="modules/event.html" class="tsd-kind-icon">event</a></li>
 							<li class="tsd-kind-module"><a href="modules/event_bus.html" class="tsd-kind-icon">event-<wbr>bus</a></li>
-							<li class="tsd-kind-module"><a href="modules/i_event_bus.html" class="tsd-kind-icon">i-<wbr>event-<wbr>bus</a></li>
-							<li class="tsd-kind-module"><a href="modules/i_subscriber.html" class="tsd-kind-icon">i-<wbr>subscriber</a></li>
 							<li class="tsd-kind-module"><a href="modules/index.html" class="tsd-kind-icon">index</a></li>
 							<li class="tsd-kind-module"><a href="modules/subscriber.html" class="tsd-kind-icon">subscriber</a></li>
 						</ul>
