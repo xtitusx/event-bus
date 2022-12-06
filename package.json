@@ -38,9 +38,6 @@
     "type": "git",
     "url": "git+https://github.com/xtitusx/event-bus.git"
   },
-  "dependencies": {
-    "uuid": "^8.3.2"
-  },
   "devDependencies": {
     "@types/chai": "^4.2.6",
     "@types/mocha": "^5.2.7",

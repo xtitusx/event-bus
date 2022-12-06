@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 import { Event } from './event';
 import { ISubscriber } from './subscriber';
 
@@ -25,7 +23,10 @@ export interface IEventBus {
 }
 
 export class EventBus implements IEventBus {
+    private static readonly MAX_ID = 99;
+
     private subscribersByEvent: ISubscribersByEvent;
+    private count = 0;
 
     public constructor() {
         this.subscribersByEvent = {};
@@ -115,6 +116,6 @@ export class EventBus implements IEventBus {
     }
 
     private getNextId(): string {
-        return uuidv4();
+        return `${new Date().toISOString()}-${(this.count = this.count < EventBus.MAX_ID ? ++this.count : 1)}`;
     }
 }
