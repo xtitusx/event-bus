@@ -46,7 +46,7 @@ npm install @xtitusx/event-bus
 
 ## Basic Usage
 
-- Inherit a subclass from **Event** abstract class:
+- Inherit a subclass from `Event` abstract class:
 
 ```
 export class HelloWorldEvent extends Event {}
@@ -58,7 +58,7 @@ export class HelloWorldEvent extends Event {}
 export type HelloWorldMessage = { name?: string };
 ```
 
-- Inherit a subclass from **Subscriber** abstract class:
+- Inherit a subclass from `Subscriber` abstract class:
 
 ```
 export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
@@ -77,7 +77,7 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
 }
 ```
 
-- Then you can play around with an **EventBus** instance:
+- Then you can play around with an `EventBus` instance:
 
 ```
 const eventBus = new EventBus();

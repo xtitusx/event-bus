@@ -2751,7 +2751,7 @@ img {
 				<h2>Basic Usage</h2>
 			</a>
 			<ul>
-				<li>Inherit a subclass from <strong>Event</strong> abstract class:</li>
+				<li>Inherit a subclass from <code>Event</code> abstract class:</li>
 			</ul>
 			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldEvent</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Event</span><span style="color: #000000"> {}</span>
 </code></pre>
@@ -2761,7 +2761,7 @@ img {
 			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">type</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000"> = { </span><span style="color: #001080">name</span><span style="color: #000000">?: </span><span style="color: #267F99">string</span><span style="color: #000000"> };</span>
 </code></pre>
 			<ul>
-				<li>Inherit a subclass from <strong>Subscriber</strong> abstract class:</li>
+				<li>Inherit a subclass from <code>Subscriber</code> abstract class:</li>
 			</ul>
 			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldEventSubscriber</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Subscriber</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldEvent</span><span style="color: #000000">&gt; {</span>
 <span style="color: #000000">    </span><span style="color: #0000FF">constructor</span><span style="color: #000000">() {</span>
@@ -2779,7 +2779,7 @@ img {
 <span style="color: #000000">}</span>
 </code></pre>
 			<ul>
-				<li>Then you can play around with an <strong>EventBus</strong> instance:</li>
+				<li>Then you can play around with an <code>EventBus</code> instance:</li>
 			</ul>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
 <span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
