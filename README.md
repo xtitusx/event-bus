@@ -28,11 +28,15 @@
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
 3. [EventBus](#eventbus)
+    - [subscribe()](#subscribe)
+    - [once()](#once)
+    - [clear()](#clear)
 4. [Subscription](#subscription)
-3. [TypeDoc](#typedoc)
-4. [Changelog](#changelog)
-5. [Maintainer](#maintainer)
-6. [License](#license)
+    - [unsubscribe()](#unsubscribe)
+5. [TypeDoc](#typedoc)
+6. [Changelog](#changelog)
+7. [Maintainer](#maintainer)
+8. [License](#license)
 
 ## Installation
 
@@ -42,19 +46,19 @@ npm install @xtitusx/event-bus
 
 ## Basic Usage
 
-- Declare an event:
+- Inherit a subclass from **Event** abstract class:
 
 ```
 export class HelloWorldEvent extends Event {}
 ```
 
-- Declare a message:
+- Declare a custom type message:
 
 ```
 export type HelloWorldMessage = { name?: string };
 ```
 
-- Declare a subscriber:
+- Inherit a subclass from **Subscriber** abstract class:
 
 ```
 export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
@@ -78,90 +82,95 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
 ```
 const eventBus = new EventBus();
 eventBus.subscribe(new HelloWorldEventSubscriber());
-            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
-                name: 'Benjamin',
-            });
-
-// => 'Hello Benjamin!'       
-```
-
-```
-const eventBus = new EventBus();
-const subcription = eventBus.subscribe(new HelloWorldEventSubscriber());
 eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
-// => 'Hello World!' 
-subcription.unsubscribe();
-```
 
-```
-const eventBus = new EventBus();
-eventBus.once(new HelloWorldEventSubscriber());
-            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
-                name: 'Chorizo',
-            });
-
-// => 'Hello Chorizo!'       
-```
-
-```
-const eventBus = new EventBus();
-eventBus.subscribe(new HelloWorldEventSubscriber());
-            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
-                name: 'Benjamin',
-            });
-
-// => 'Hello Benjamin!' 
-eventBus.clear();
+// => 'Hello World!'
 ```
 
 ## EventBus
 
+### subscribe()
+
+Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
+
+Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times:
+
 ```
-export interface IEventBus {
-    /**
-     * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
-     *
-     * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
-     * @override
-     * @param subscriber
-     */
-    subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription;
+const eventBus = new EventBus();
+eventBus.subscribe(new HelloWorldEventSubscriber());
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 
-    /**
-     * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.
-     * @override
-     * @remarks Chainable method.
-     * @param subscriber
-     */
-    once<T extends Event>(subscriber: ISubscriber<T>): IEventBus;
+// => 'Hello World!'
 
-    /**
-     * Executes each of the subscribers for the specified event.
-     * @override
-     * @param event
-     * @param message
-     */
-    publish<T>(event: Event, message?: T): void;
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Benjamin',
+});
 
-    /**
-     * Removes all subscribers.
-     * @override
-     */
-    clear(): void;
-}
+// => 'Hello Benjamin!'  
+```
+
+### once()
+
+Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed:
+
+```
+const eventBus = new EventBus();
+eventBus.once(new HelloWorldEventSubscriber());
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Chorizo',
+});
+
+// => 'Hello Chorizo!'    
+
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Chorizo',
+});
+
+// => Nothing
+```
+
+### clear()
+
+Removes all subscribers:
+
+```
+const eventBus = new EventBus();
+eventBus.subscribe(new HelloWorldEventSubscriber());
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Benjamin',
+});
+
+// => 'Hello Benjamin!' 
+
+eventBus.clear();
+
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Benjamin',
+});
+
+// => Nothing
 ```
 
 ## Subscription
 
+### unsubscribe()
+
+Removes the subscriber for the specified event:
+
 ```
-export interface ISubscription {
-    id: string;
-    eventName: string;
-    /**
-     * Removes the subscriber for the specified event.
-     */
-    unsubscribe: () => void;
-}
+const eventBus = new EventBus();
+const subscription = eventBus.subscribe(new HelloWorldEventSubscriber());
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+
+// => 'Hello World!' 
+
+subscription.unsubscribe();
+
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Chorizo',
+});
+
+// => Nothing
 ```
 
 ## TypeDoc

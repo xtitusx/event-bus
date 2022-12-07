@@ -52,13 +52,13 @@ describe('EventBus', () => {
 
     describe('#unsubscribe()', () => {
         it("shoud assign 'Hello World!' value to 'Test.MSG'", () => {
-            const subcription = eventBus.subscribe(new HelloWorldEventSubscriber());
+            const subscription = eventBus.subscribe(new HelloWorldEventSubscriber());
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
 
             assert.equal(Test.MESSAGE, 'Hello World!');
             assert.equal(Test.COUNT, 5);
 
-            subcription.unsubscribe();
+            subscription.unsubscribe();
             eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
                 name: 'Benjamin',
             });
