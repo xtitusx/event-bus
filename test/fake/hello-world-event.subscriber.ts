@@ -1,6 +1,6 @@
 import { Subscriber } from '../../src/subscriber';
 
-import { Test } from '../event-bus-test';
+import { Fake } from './fake';
 import { HelloWorldEvent } from './hello-world.event';
 import { HelloWorldMessage } from './hello-world.message';
 
@@ -14,8 +14,8 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
      */
     public implCallback(): Function {
         return async (message: HelloWorldMessage): Promise<void> => {
-            Test.MESSAGE = `Hello ${message?.name ?? 'World'}!`;
-            Test.COUNT++;
+            Fake.MESSAGE = `Hello ${message?.name ?? 'World'}!`;
+            Fake.COUNT++;
         };
     }
 }

@@ -10,14 +10,6 @@ export interface ISubscription {
     unsubscribe: () => void;
 }
 
-interface ICallable {
-    [key: string]: { callback: Function; once: boolean };
-}
-
-interface ISubscribersByEvent {
-    [key: string]: ICallable;
-}
-
 export interface IEventBus {
     /**
      * Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.
@@ -51,6 +43,12 @@ export interface IEventBus {
     clear(): void;
 }
 
+interface ISubscribersByEvent {
+    [key: string]: {
+        [key: string]: { callback: Function; once: boolean };
+    };
+}
+
 export class EventBus implements IEventBus {
     private static readonly MAX_ID = 99;
 
@@ -65,9 +63,7 @@ export class EventBus implements IEventBus {
         const eventName = subscriber.event.name;
         const id = this.getNextId();
 
-        if (!this.subscribersByEvent[eventName]) {
-            this.subscribersByEvent[eventName] = {};
-        }
+        this.initEventMap(eventName);
 
         this.subscribersByEvent[eventName][id] = { callback: subscriber.callback, once: false };
 
@@ -88,9 +84,7 @@ export class EventBus implements IEventBus {
         const eventName = subscriber.event.name;
         const id = this.getNextId();
 
-        if (!this.subscribersByEvent[eventName]) {
-            this.subscribersByEvent[eventName] = {};
-        }
+        this.initEventMap(eventName);
 
         this.subscribersByEvent[eventName][id] = { callback: subscriber.callback, once: true };
 
@@ -119,6 +113,12 @@ export class EventBus implements IEventBus {
 
     public clear(): void {
         this.subscribersByEvent = {};
+    }
+
+    private initEventMap(eventName: string): void {
+        if (!this.subscribersByEvent[eventName]) {
+            this.subscribersByEvent[eventName] = {};
+        }
     }
 
     private getNextId(): string {
