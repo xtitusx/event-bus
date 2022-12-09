@@ -61,9 +61,9 @@ export type HelloWorldMessage = { name?: string };
 - Inherit a subclass from `Subscriber` abstract class:
 
 ```
-export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
+export class HelloWorldEventSubscriber extends Subscriber {
     constructor() {
-        super(HelloWorldEvent);
+        super();
     }
 
     /**
@@ -81,8 +81,8 @@ export class HelloWorldEventSubscriber extends Subscriber<HelloWorldEvent> {
 
 ```
 const eventBus = new EventBus();
-eventBus.subscribe(new HelloWorldEventSubscriber());
-eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
+eventBus.publish(HelloWorldEvent);
 
 // => 'Hello World!'
 ```
@@ -97,8 +97,8 @@ Multiple calls passing the same combination of event and subscriber will result 
 
 ```
 const eventBus = new EventBus();
-eventBus.subscribe(new HelloWorldEventSubscriber());
-eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
+eventBus.publish(HelloWorldEvent);
 
 // => 'Hello World!'
 
@@ -115,7 +115,7 @@ Adds a one time subscriber to the event. This subscriber is invoked only the nex
 
 ```
 const eventBus = new EventBus();
-eventBus.once(new HelloWorldEventSubscriber());
+eventBus.once(HelloWorldEvent, new HelloWorldEventSubscriber());
 eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
     name: 'Chorizo',
 });
@@ -135,7 +135,7 @@ Removes all subscribers:
 
 ```
 const eventBus = new EventBus();
-eventBus.subscribe(new HelloWorldEventSubscriber());
+eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
 eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
     name: 'Benjamin',
 });
@@ -159,8 +159,8 @@ Removes the subscriber for the specified event:
 
 ```
 const eventBus = new EventBus();
-const subscription = eventBus.subscribe(new HelloWorldEventSubscriber());
-eventBus.publish<HelloWorldMessage>(HelloWorldEvent);
+const subscription = eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
+eventBus.publish(HelloWorldEvent);
 
 // => 'Hello World!' 
 

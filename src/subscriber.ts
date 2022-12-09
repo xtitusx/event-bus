@@ -1,7 +1,4 @@
-import { Event } from './event';
-
-export interface ISubscriber<T extends Event> {
-    event: new () => T;
+export interface ISubscriber {
     callback: Function;
 
     /**
@@ -10,12 +7,10 @@ export interface ISubscriber<T extends Event> {
     implCallback(): Function;
 }
 
-export abstract class Subscriber<T extends Event> implements ISubscriber<T> {
-    event: new () => T;
+export abstract class Subscriber implements ISubscriber {
     callback: Function;
 
-    constructor(event: new () => T) {
-        this.event = event;
+    constructor() {
         this.callback = this.implCallback();
     }
 

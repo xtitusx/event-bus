@@ -2763,9 +2763,9 @@ img {
 			<ul>
 				<li>Inherit a subclass from <code>Subscriber</code> abstract class:</li>
 			</ul>
-			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldEventSubscriber</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Subscriber</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldEvent</span><span style="color: #000000">&gt; {</span>
+			<pre><code><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">HelloWorldEventSubscriber</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Subscriber</span><span style="color: #000000"> {</span>
 <span style="color: #000000">    </span><span style="color: #0000FF">constructor</span><span style="color: #000000">() {</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">super</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">super</span><span style="color: #000000">();</span>
 <span style="color: #000000">    }</span>
 
 <span style="color: #000000">    </span><span style="color: #008000">/**</span>
@@ -2782,8 +2782,8 @@ img {
 				<li>Then you can play around with an <code>EventBus</code> instance:</li>
 			</ul>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// =&gt; &#039;Hello World!&#039;</span>
 </code></pre>
@@ -2796,8 +2796,8 @@ img {
 			<p>Adds a subscriber for the specified event. No checks are made to see if the subscriber has already been added.</p>
 			<p>Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times:</p>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// =&gt; &#039;Hello World!&#039;</span>
 
@@ -2812,7 +2812,7 @@ img {
 			</a>
 			<p>Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed:</p>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">once</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
 <span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, {</span>
 <span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Chorizo&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">});</span>
@@ -2830,7 +2830,7 @@ img {
 			</a>
 			<p>Removes all subscribers:</p>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
 <span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, {</span>
 <span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Benjamin&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">});</span>
@@ -2853,8 +2853,8 @@ img {
 			</a>
 			<p>Removes the subscriber for the specified event:</p>
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subscription</span><span style="color: #000000"> = </span><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
-<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">&lt;</span><span style="color: #267F99">HelloWorldMessage</span><span style="color: #000000">&gt;(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">subscription</span><span style="color: #000000"> = </span><span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// =&gt; &#039;Hello World!&#039; </span>
 
@@ -2928,11 +2928,9 @@ img {
 				<div class="tsd-legend-group">
 					<ul class="tsd-legend">
 						<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-						<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
 					</ul>
 					<ul class="tsd-legend">
 						<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-						<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 					</ul>
 				</div>
 			</div>
