@@ -16,17 +16,19 @@ export interface IEventBus {
      *
      * Multiple calls passing the same combination of event and subscriber will result in the subscriber being added multiple times.
      * @override
+     * @param event
      * @param subscriber
      */
-    subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription;
+    subscribe(event: Event, subscriber: ISubscriber): ISubscription;
 
     /**
      * Adds a one time subscriber to the event. This subscriber is invoked only the next time the event is fired, after which it is removed.
      * @override
      * @remarks Chainable method.
+     * @param event
      * @param subscriber
      */
-    once<T extends Event>(subscriber: ISubscriber<T>): IEventBus;
+    once(event: Event, subscriber: ISubscriber): IEventBus;
 
     /**
      * Executes each of the subscribers for the specified event.
@@ -59,8 +61,8 @@ export class EventBus implements IEventBus {
         this.subscribersByEvent = {};
     }
 
-    public subscribe<T extends Event>(subscriber: ISubscriber<T>): ISubscription {
-        const eventName = subscriber.event.name;
+    public subscribe(event: Event, subscriber: ISubscriber): ISubscription {
+        const eventName = event.name;
         const id = this.getNextId();
 
         this.initEventMap(eventName);
@@ -80,8 +82,8 @@ export class EventBus implements IEventBus {
         };
     }
 
-    public once<T extends Event>(subscriber: ISubscriber<T>): this {
-        const eventName = subscriber.event.name;
+    public once(event: Event, subscriber: ISubscriber): this {
+        const eventName = event.name;
         const id = this.getNextId();
 
         this.initEventMap(eventName);
