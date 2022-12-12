@@ -2726,7 +2726,10 @@ img {
 			</a>
 			<ol>
 				<li><a href="#installation">Installation</a></li>
-				<li><a href="#basic-usage">Basic Usage</a></li>
+				<li><a href="#basic-usage">Basic Usage</a><ul>
+						<li><a href="#optional-singleton">Optional Singleton</a></li>
+					</ul>
+				</li>
 				<li><a href="#eventbus">EventBus</a><ul>
 						<li><a href="#subscribe">subscribe()</a></li>
 						<li><a href="#once">once()</a></li>
@@ -2784,6 +2787,15 @@ img {
 			<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">eventBus</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">EventBus</span><span style="color: #000000">();</span>
 <span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
 <span style="color: #001080">eventBus</span><span style="color: #000000">.</span><span style="color: #795E26">publish</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// =&gt; &#039;Hello World!&#039;</span>
+</code></pre>
+			<a href="#optional-singleton" id="optional-singleton" style="color: inherit; text-decoration: none;">
+				<h3>Optional Singleton</h3>
+			</a>
+			<p>Although the singleton is considered to be an anti pattern as it&#39;s introducing global states, it can be useful in some use cases, like a lack of dependency injection:</p>
+			<pre><code><span style="color: #001080">EventBus</span><span style="color: #000000">.</span><span style="color: #795E26">getInstance</span><span style="color: #000000">().</span><span style="color: #795E26">subscribe</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">, </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">HelloWorldEventSubscriber</span><span style="color: #000000">());</span>
+<span style="color: #001080">EventBus</span><span style="color: #000000">.</span><span style="color: #795E26">getInstance</span><span style="color: #000000">().</span><span style="color: #795E26">publish</span><span style="color: #000000">(</span><span style="color: #001080">HelloWorldEvent</span><span style="color: #000000">);</span>
 
 <span style="color: #008000">// =&gt; &#039;Hello World!&#039;</span>
 </code></pre>

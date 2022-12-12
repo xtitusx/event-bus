@@ -52,6 +52,7 @@ interface ISubscribersByEvent {
 }
 
 export class EventBus implements IEventBus {
+    private static INSTANCE: EventBus;
     private static readonly MAX_ID = 99;
 
     private subscribersByEvent: ISubscribersByEvent;
@@ -59,6 +60,17 @@ export class EventBus implements IEventBus {
 
     public constructor() {
         this.subscribersByEvent = {};
+    }
+
+    /**
+     * Keep the constructor public
+     */
+    public static getInstance(): EventBus {
+        if (!EventBus.INSTANCE) {
+            EventBus.INSTANCE = new EventBus();
+        }
+
+        return EventBus.INSTANCE;
     }
 
     public subscribe(event: Event, subscriber: ISubscriber): ISubscription {

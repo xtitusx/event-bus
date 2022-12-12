@@ -141,4 +141,23 @@ describe('EventBus', () => {
             assert.equal(Fake.COUNT_1, 10);
         });
     });
+
+    describe('#getInstance()', () => {
+        it("shoud assign 'Hello World!' value to 'Fake.MESSAGE_1'", () => {
+            EventBus.getInstance().subscribe(HelloWorldEvent, new HelloWorldEventSubscriber(1));
+            EventBus.getInstance().publish(HelloWorldEvent);
+
+            assert.equal(Fake.MESSAGE_1, 'Hello World!');
+            assert.equal(Fake.COUNT_1, 11);
+        });
+
+        it("shoud assign 'Hello Benjamin!' value to 'Fake.MESSAGE_1'", () => {
+            EventBus.getInstance().publish<HelloWorldMessage>(HelloWorldEvent, {
+                name: 'Benjamin',
+            });
+
+            assert.equal(Fake.MESSAGE_1, 'Hello Benjamin!');
+            assert.equal(Fake.COUNT_1, 12);
+        });
+    });
 });

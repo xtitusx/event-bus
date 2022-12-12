@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2022-12-12
+
+### Added
+
+-   Add EventBus "Optional Singleton" pattern.
+
 ## [3.0.0] - 2022-12-09
 
 ### Changed
