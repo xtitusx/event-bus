@@ -27,6 +27,7 @@
 
 1. [Installation](#installation)
 2. [Basic Usage](#basic-usage)
+    - [Optional Singleton](#optional-singleton)
 3. [EventBus](#eventbus)
     - [subscribe()](#subscribe)
     - [once()](#once)
@@ -83,6 +84,17 @@ export class HelloWorldEventSubscriber extends Subscriber {
 const eventBus = new EventBus();
 eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
 eventBus.publish(HelloWorldEvent);
+
+// => 'Hello World!'
+```
+
+### Optional Singleton
+
+Although the singleton is considered to be an anti pattern as it's introducing global states, it can be useful in some use cases, like a lack of dependency injection:
+
+```
+EventBus.getInstance().subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
+EventBus.getInstance().publish(HelloWorldEvent);
 
 // => 'Hello World!'
 ```
