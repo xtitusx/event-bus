@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Rewrite EventBus methods, in order to be to able bind a subscriber to multiple events (BREAKING CHANGE).
+-   Rewrite EventBus methods, in order to be to able to bind one subscriber to multiple events (BREAKING CHANGE).
 
 ## [2.0.0] - 2022-12-06
 
