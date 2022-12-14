@@ -2815,7 +2815,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L61">event-bus.ts:61</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L62">event-bus.ts:62</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <a href="event_bus.EventBus.html" class="tsd-signature-type" data-tsd-kind="Class">EventBus</a></h4>
@@ -2831,7 +2831,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L59">event-bus.ts:59</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L60">event-bus.ts:60</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2841,7 +2841,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">subscribers<wbr>ByEvent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ISubscribersByEvent</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L58">event-bus.ts:58</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L59">event-bus.ts:59</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2851,7 +2851,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">INSTANCE<span class="tsd-signature-symbol">:</span> <a href="event_bus.EventBus.html" class="tsd-signature-type" data-tsd-kind="Class">EventBus</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L55">event-bus.ts:55</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L56">event-bus.ts:56</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2861,7 +2861,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">MAX_<wbr>ID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">99</span><span class="tsd-signature-symbol"> = 99</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L56">event-bus.ts:56</a></li>
+						<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L57">event-bus.ts:57</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2872,21 +2872,27 @@ img {
 				<a name="clear" class="tsd-anchor"></a>
 				<h3>clear</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">?: </span><a href="event.Event.html" class="tsd-signature-type" data-tsd-kind="Class">Event</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/event_bus.IEventBus.html#clear">clear</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L128">event-bus.ts:128</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L129">event-bus.ts:129</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Removes all subscribers.</p>
+								<p>Removes all subscribers, or only subcribers for the specified event.</p>
 							</div>
 						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> event: <a href="event.Event.html" class="tsd-signature-type" data-tsd-kind="Class">Event</a></h5>
+							</li>
+						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 					</li>
 				</ul>
@@ -2901,7 +2907,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L138">event-bus.ts:138</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L143">event-bus.ts:143</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -2918,7 +2924,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L132">event-bus.ts:132</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L137">event-bus.ts:137</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2942,7 +2948,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/event_bus.IEventBus.html#once">once</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L97">event-bus.ts:97</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L98">event-bus.ts:98</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2979,7 +2985,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/event_bus.IEventBus.html#publish">publish</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L108">event-bus.ts:108</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L109">event-bus.ts:109</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3017,7 +3023,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Implementation of <a href="../interfaces/event_bus.IEventBus.html">IEventBus</a>.<a href="../interfaces/event_bus.IEventBus.html#subscribe">subscribe</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L76">event-bus.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L77">event-bus.ts:77</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3049,7 +3055,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/b9f5213/src/event-bus.ts#L68">event-bus.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/xtitusx/event-bus/blob/271c08d/src/event-bus.ts#L69">event-bus.ts:69</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

@@ -140,6 +140,49 @@ describe('EventBus', () => {
             assert.equal(Fake.MESSAGE_1, undefined);
             assert.equal(Fake.COUNT_1, 10);
         });
+
+        it("shoud assign 'Hello Benjamin and, again, welcome to the Aperture Science computer-aided enrichment center.' value to 'Fake.MESSAGE_2'", () => {
+            eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber(1));
+            eventBus.subscribe(HelloGladosEvent, new HelloWorldEventSubscriber(2));
+            eventBus.publish(HelloWorldEvent);
+            eventBus.publish(HelloGladosEvent);
+
+            assert.equal(Fake.MESSAGE_1, 'Hello World!');
+            assert.equal(Fake.COUNT_1, 11);
+            assert.equal(
+                Fake.MESSAGE_2,
+                'Hello World and, again, welcome to the Aperture Science computer-aided enrichment center.'
+            );
+            assert.equal(Fake.COUNT_2, 2);
+
+            eventBus.clear(HelloWorldEvent);
+
+            eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+                name: 'Benjamin',
+            });
+            eventBus.publish<HelloWorldMessage>(HelloGladosEvent, {
+                name: 'Benjamin',
+            });
+
+            assert.equal(Fake.MESSAGE_1, 'Hello World!');
+            assert.equal(Fake.COUNT_1, 11);
+
+            assert.equal(
+                Fake.MESSAGE_2,
+                'Hello Benjamin and, again, welcome to the Aperture Science computer-aided enrichment center.'
+            );
+            assert.equal(Fake.COUNT_2, 3);
+
+            eventBus.clear(HelloGladosEvent);
+
+            eventBus.publish<HelloWorldMessage>(HelloGladosEvent);
+
+            assert.equal(
+                Fake.MESSAGE_2,
+                'Hello Benjamin and, again, welcome to the Aperture Science computer-aided enrichment center.'
+            );
+            assert.equal(Fake.COUNT_2, 3);
+        });
     });
 
     describe('#getInstance()', () => {
@@ -148,7 +191,7 @@ describe('EventBus', () => {
             EventBus.getInstance().publish(HelloWorldEvent);
 
             assert.equal(Fake.MESSAGE_1, 'Hello World!');
-            assert.equal(Fake.COUNT_1, 11);
+            assert.equal(Fake.COUNT_1, 12);
         });
 
         it("shoud assign 'Hello Benjamin!' value to 'Fake.MESSAGE_1'", () => {
@@ -157,7 +200,7 @@ describe('EventBus', () => {
             });
 
             assert.equal(Fake.MESSAGE_1, 'Hello Benjamin!');
-            assert.equal(Fake.COUNT_1, 12);
+            assert.equal(Fake.COUNT_1, 13);
         });
     });
 });
