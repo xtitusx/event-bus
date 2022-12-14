@@ -39,10 +39,11 @@ export interface IEventBus {
     publish<T>(event: Event, message?: T): void;
 
     /**
-     * Removes all subscribers.
+     * Removes all subscribers, or only subcribers for the specified event.
      * @override
+     * @param event
      */
-    clear(): void;
+    clear(event?: Event): void;
 }
 
 interface ISubscribersByEvent {
@@ -125,8 +126,12 @@ export class EventBus implements IEventBus {
         }
     }
 
-    public clear(): void {
-        this.subscribersByEvent = {};
+    public clear(event?: Event): void {
+        if (!event) {
+            this.subscribersByEvent = {};
+        } else {
+            delete this.subscribersByEvent[event.name];
+        }
     }
 
     private initEventMap(eventName: string): void {

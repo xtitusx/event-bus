@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - 2022-12-14
+
+### Changed
+
+-   Rewrite EventBus.clear() method, in order to optionaly remove subscribers for a specified event. 
+
 ## [3.1.0] - 2022-12-12
 
 ### Added
