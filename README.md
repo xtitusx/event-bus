@@ -143,7 +143,7 @@ eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
 
 ### clear()
 
-Removes all subscribers:
+- Removes all subscribers:
 
 ```
 const eventBus = new EventBus();
@@ -155,6 +155,26 @@ eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
 // => 'Hello Benjamin!' 
 
 eventBus.clear();
+
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Benjamin',
+});
+
+// => Nothing
+```
+
+- Or removes only subscribers for the specified event:
+
+```
+const eventBus = new EventBus();
+eventBus.subscribe(HelloWorldEvent, new HelloWorldEventSubscriber());
+eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
+    name: 'Benjamin',
+});
+
+// => 'Hello Benjamin!' 
+
+eventBus.clear(HelloWorldEvent);
 
 eventBus.publish<HelloWorldMessage>(HelloWorldEvent, {
     name: 'Benjamin',
